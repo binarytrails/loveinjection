@@ -2,6 +2,13 @@ from django.shortcuts import HttpResponse, render_to_response, render
 from django.views.decorators.csrf import csrf_protect, csrf_exempt, requires_csrf_token
 from django.db import connection
 
+log = """<i>Username:</i> %s</br>
+    <i>Password:</i> %s</br>
+    <i>Authentificated:</i> %s</br>
+    <i>Rows matched:</i></br>%s</br>
+    <i>SQL:</i></br>%s
+"""
+
 def login(request):
     return render_to_response('level1/login.html')
 
@@ -25,5 +32,4 @@ def auth(request):
             creds[user] = pwd
             if user: auth = True
 
-        log = username + " </br>" + password + "</br>" + str(auth) + "</br>" + str(creds) + " </br>" + sql
-        return render(request, 'level1/login.html', {"log": log})
+        return render(request, 'level1/login.html', {"log": log %(username, password, str(auth), str(creds), sql)})
