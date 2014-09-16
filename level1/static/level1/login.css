@@ -1,0 +1,13 @@
+div.main
+{
+    color: DeepPink;
+    font-family: Helvetica; 
+}
+table, th, td 
+{
+    border: 0px solid black;
+}
+th, td
+{
+    padding: 15px;
+}
