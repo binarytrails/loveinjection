@@ -9,22 +9,22 @@ log = """<i>Username:</i> %s</br>
     <i>SQL:</i></br>%s
 """
 
-def login(request):
-    return render_to_response('level1/login.html')
-
 @csrf_exempt
-def auth(request):
-    if request.method == "POST":
+def level1(request):
+    if request.method == "GET":
+        return render(request, 'sqlite3app/login.html')
+
+    elif request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         cursor = connection.cursor()
-        sql = """SELECT username, password FROM level1_user 
+        sql = """SELECT username, password FROM sqlite3app_user 
             WHERE username='""" + username + "' AND password='" + password + "';"
         
         try:
             query = cursor.execute(sql)
         except Exception, error:
-            return render(request, 'level1/login.html', {"log": error})
+            return render(request, 'sqlite3app/login.html', {"log": error})
 
         creds = {}
         auth = False 
@@ -32,4 +32,5 @@ def auth(request):
             creds[user] = pwd
             if user: auth = True
 
-        return render(request, 'level1/login.html', {"log": log %(username, password, str(auth), str(creds), sql)})
+        return render(request, 'sqlite3app/login.html', {"log": log %(username, password, str(auth), str(creds), sql)})
+
