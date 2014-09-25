@@ -8,11 +8,14 @@ log = """<i>Username:</i> %s</br>
     <i>Rows matched:</i></br>%s</br>
     <i>SQL:</i></br>%s
 """
+postLevel1 = "/sqlite3/level1/"
 
 @csrf_exempt
 def level1(request):
     if request.method == "GET":
-        return render(request, 'sqlite3app/login.html')
+        return render(request, 'sqlite3app/login.html', {
+            "postTo": postLevel1
+        })
 
     elif request.method == "POST":
         username = request.POST['username']
@@ -24,7 +27,9 @@ def level1(request):
         try:
             query = cursor.execute(sql)
         except Exception, error:
-            return render(request, 'sqlite3app/login.html', {"log": error})
+            return render(request, 'sqlite3app/login.html', {
+                "postTo": postLevel1, "log": error
+            })
 
         creds = {}
         auth = False 
@@ -32,5 +37,8 @@ def level1(request):
             creds[user] = pwd
             if user: auth = True
 
-        return render(request, 'sqlite3app/login.html', {"log": log %(username, password, str(auth), str(creds), sql)})
+        return render(request, 'sqlite3app/login.html', {
+            "postTo": postLevel1,
+            "log": log %(username, password, str(auth), str(creds), sql)
+        })
 

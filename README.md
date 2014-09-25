@@ -5,8 +5,8 @@ One day or another you'll be the victim.
 # Setup
 * create tables
 
-    ./manage syncdb
+        ./manage syncdb
 
 * populate database
 
-    ./manage.py shell < scripts/database/populate.py
+        ./manage.py shell < scripts/database/populate.py
