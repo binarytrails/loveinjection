@@ -3,10 +3,29 @@ One day or another you'll be the victim.
 
 
 # Setup
-* create tables
 
-        ./manage syncdb
+## Virtualenv
 
-* populate database
+Run your application inside a virtual environment
 
-        ./manage.py shell < scripts/database/populate.py
+* Create
+
+        virtualenv DJANGO
+        
+* Start
+
+        source DJANGO/bin/activate
+
+* Install dependecies
+
+        pip install django==1.7      
+
+* Stop
+
+        deactivate
+
+## Database
+
+        scripts/bash/./reset-db.sh
+
+
