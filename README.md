@@ -1,31 +1,14 @@
 # Love Injection
 One day or another you'll be the victim.
 
-
-# Setup
-
-## Virtualenv
-
-Run your application inside a virtual environment
-
-* Create
+## Setup
 
         virtualenv DJANGO
-        
-* Start
-
         source DJANGO/bin/activate
-
-* Install dependecies
-
-        pip install django==1.7      
-
-* Stop
+        
+        pip install -r requirements.txt   
+        scripts/bash/./reset-db.sh
+        ./manage.py runserver
 
         deactivate
-
-## Database
-
-        scripts/bash/./reset-db.sh
-
 
